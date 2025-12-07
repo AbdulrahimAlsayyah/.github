@@ -1,0 +1,118 @@
+CREATE SCHEMA A2Database;
+
+create table if not exists A2Database.CustomerAddress
+(
+    "CustomerAddressID" bigserial primary key,
+    "HouseNumber",
+    "Street",
+    "City",
+    "PostCode"
+);
+
+create table if not exists A2Database.Customer
+(
+    "CustomerID" bigserial primary key,
+    "CustomerAddressFK",
+    "FirstName",
+    "LastName",
+    "Username",
+    "Email",
+    "RegistrationDate",
+    "ContactNumber"
+);
+
+create table if not exists A2Database.Refund
+(
+    "RefundID" bigserial primary key,
+    "RefundStatus",
+    "RefundAmount",
+    "RefundDate"
+);
+
+create table if not exists A2Database.Order
+(
+    "OrderID" bigserial primary key,
+    "CustomerFK",
+    "RefundFK",
+    "NumberOfItems",
+    "OrderComplated",
+    "TotalPrice"
+);
+
+create table if not exists A2Database.Platform
+(
+    "PlatformID" bigserial primary key,
+    "Platform"
+);
+
+create table if not exists A2Database.DeveloperContact
+(
+    "DeveloperContactID" bigserial primary key,
+    "ContactFirstName",
+    "ContactLastName",
+    "ContactNumber",
+    "AlternativeNumber"
+);
+
+create table if not exists A2Database.DeveloperLocation
+(
+    "DeveloperLocationID" bigserial primary key,
+    "DeveloperLocation",
+    "DevStreetName",
+    "DevBuildingNumber"
+);
+
+create table if not exists A2Database.GameDeveloper
+(
+    "GameDeveloperID" bigserial primary key,
+    "DeveloperContactFK",
+    "DeveloperLocationFK",
+    "PlatformFK",
+    "Name",
+    "Description",
+    "SupportEmail"
+);
+
+create table if not exists A2Database.Genre
+(
+    "GenreID" bigserial primary key,
+    "Genre"
+);
+
+create table if not exists A2Database.ProductGenre
+(
+    "ProductGenreID" bigserial primary key,
+    "GenreFK",
+    "ProductGenre"
+);
+
+create table if not exists A2Database.Product
+(
+    "ProductID" bigserial primary key,
+    "GameDeveloperFK",
+    "ProductGenreFK",
+    "PlatformFK",
+    "Name",
+    "Price",
+    "Description"
+);
+
+create table if not exists A2Database.Review
+(
+    "ReviewID" bigserial primary key,
+    "CustomerFK",
+    "ProductFK",
+    "ReviewContent",
+    "Rating",
+    "ReviewDate"
+);
+
+create table if not exists A2Database.Payment
+(
+    "PaymentID" bigserial primary key,
+    "ProductFK",
+    "OrderFK",
+    "TransactionAlerts",
+    "PaymentSuccessful",
+    "TransactionDate"
+);
